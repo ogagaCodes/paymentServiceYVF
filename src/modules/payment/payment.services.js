@@ -6,9 +6,10 @@ exports.initiatePayment = async () => {
   try {
       //  consume frome order queue
      consumeFromQueue();
+     publishToQueue();
     return {
       error: false,
-      message: "Payment successfu... pending confirmation..",
+      message: "Payment successful... pending confirmation..",
       data: null,
     };
   } catch (err) {
