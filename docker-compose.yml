@@ -1,0 +1,28 @@
+version: "2"
+services:
+  web:
+    build: .
+    command: npm run start:dev
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+      - rabbitmq
+    depends_on:
+      - mongo
+      - rabbitmq
+    environment:
+      MONGODBURI: "${MONGODBURI}"
+      BROKER_URI: rabbitmq
+      PREFETCH_COUNT: 3
+  mongo:
+    container_name: payment_mongo
+    image: mongo
+    hostname: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27018:27017"
