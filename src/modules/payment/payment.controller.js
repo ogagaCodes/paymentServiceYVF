@@ -6,6 +6,7 @@ const PaymentService = require("./payment.services");
 
 exports.initiatePaymentController = async (req, res, next) => {
   try {
+    console.log(req.body);
     const { error, message, data } = await PaymentService.initiatePayment(
       req.body
     );

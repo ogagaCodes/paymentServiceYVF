@@ -2,22 +2,22 @@ const mongoose = require("mongoose");
 const { publishToQueue } = require("../../helpers/brokers/publish");
 const { consumeFromQueue } = require("../../helpers/brokers/consume");
 
-exports.initiatePayment = async () => {
+exports.initiatePayment = async (order) => {
   try {
       //  consume frome order queue
-     consumeFromQueue();
-     publishToQueue();
+    //  consumeFromQueue();
+    //  publishToQueue(order);
     return {
       error: false,
       message: "Payment successful... pending confirmation..",
-      data: null,
+      data: order,
     };
   } catch (err) {
-    console.log(err?.response?.data || err);
+    console.log(err);
     return {
       error: true,
       message: "Error making payment",
-      data: err?.response?.data || err,
+      data: err,
     };
   }
 };

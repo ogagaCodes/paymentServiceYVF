@@ -26,3 +26,17 @@ services:
       - ./data:/data/db
     ports:
       - "27018:27017"
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    container_name: 'rabbitmq'
+    ports:
+        - "5673:5672"
+        - "15673:15672"
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/mnesia
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq/mnesia
+    networks:
+        - rabbitmq_nodejs 
+networks:
+  rabbitmq_nodejs:
+    driver: bridge 

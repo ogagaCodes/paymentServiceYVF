@@ -7,7 +7,7 @@ const TransactionHistory = require("../../modules/models/transaction.model");
 /**
  * Connect to RabbitMQ
  */
-exports.consumeFromQueue = async () => {
+exports.consumeFromQueue = async (order) => {
   try {
     const mqConnection = await amqp.connect(QURL);
     transactionDetailsChannel = await mqConnection.createChannel();
